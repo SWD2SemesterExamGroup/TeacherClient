@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Key Generator</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/3.2.0/css/bootstrap.min.css" />
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12" th:include="./static/HeaderDiv.html"></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-2" th:include="./static/MenuBar.html"></div>
+        <div class="col-xs-10" id="content">
+            <div>
+                <form method="POST">
+                    <h3>Key generator</h3>
+                    <input type="hidden" th:value="${teacherID}" name="teacherID" />
+                    <input type="submit" name="submit" value="Generate" /> <br />
+                </form>
+            </div>
+            <div style="clear:both;margin-top:10%;">
+                <h2><p th:text="${key}" style="font-size:24px;color:forestgreen;"></p></h2>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

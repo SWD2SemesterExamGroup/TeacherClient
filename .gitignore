@@ -28,4 +28,4 @@
 /.nb-gradle/
 
 ### For this Project ###
-ConstainerTEMP
+### **/ProjectLocals/*.java
