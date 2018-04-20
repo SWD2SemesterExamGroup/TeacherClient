@@ -47,10 +47,4 @@ public class HomeController
         model.addAttribute("key", key.nextString());
         return "keygenerator";
     }
-
-    @RequestMapping(value = "/key-start", method = RequestMethod.GET)
-    public String keyStart(Model model) {
-        model.addAttribute("viewmodel", new KeyGeneratorView());
-        return "KeyStart";
-    }
 }
