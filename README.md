@@ -21,7 +21,10 @@ Java Spring Boot
 
 ## Authors
 - Nicklas Andersen
-- Tony
-- Inga
+    - nick2463@stud.kea.dk
+- Anthony Vincenzo Angione
+    - School Mail
+- Inga Hercberga
+    - School Mail
 - Troels Helbo Jensen
     - troe2725@stud.kea.dk
