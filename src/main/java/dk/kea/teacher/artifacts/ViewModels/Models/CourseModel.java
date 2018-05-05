@@ -4,11 +4,6 @@ public class CourseModel
 {
     private int id;
     private String title;
-    // add lessons time and start time lesson (Done)
-    // Start time from 8.30 to 18.00 interval 15 min
-    // lesson = 45 min
-    // 2 lessons and a break for 15 min
-    // Generate keys by number of lessons (DONE)
 
     public CourseModel()
     {

@@ -1,7 +1,6 @@
 package dk.kea.teacher.artifacts.Helpers;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class KeyGeneratorController
 {

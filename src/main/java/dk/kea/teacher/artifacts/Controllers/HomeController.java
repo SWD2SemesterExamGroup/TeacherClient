@@ -1,6 +1,5 @@
 package dk.kea.teacher.artifacts.Controllers;
 
-import dk.kea.teacher.artifacts.ActiveMQ.Producer;
 import dk.kea.teacher.artifacts.ActiveMQ.ProducerPackage.JmsProducer;
 import dk.kea.teacher.artifacts.Helpers.KeyGeneratorController;
 import dk.kea.teacher.artifacts.LoginPackage.Authorization;
@@ -8,7 +7,6 @@ import dk.kea.teacher.artifacts.LoginPackage.LoginModel;
 import dk.kea.teacher.artifacts.ProjectLocals.ContainerTEMP;
 import dk.kea.teacher.artifacts.ViewModels.KeyGeneratorView;
 import dk.kea.teacher.artifacts.ViewModels.Models.TeacherModel;
-import dk.kea.teacher.artifacts.ViewModels.Models.TimeModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,10 +55,6 @@ public class HomeController
     public String generate(Model model) {
         model.addAttribute("teacherID", 1);
         model.addAttribute("key", "");
-        Producer publisher = new Producer();
-        publisher.addFlagValuePair("-teacherID", 1);
-
-        publisher.publish();
 
         // TEST
         model.addAttribute("viewmodel", new KeyGeneratorView());
