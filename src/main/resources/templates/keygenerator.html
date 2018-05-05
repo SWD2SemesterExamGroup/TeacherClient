@@ -23,19 +23,35 @@
                             th:each="item: ${viewmodel.listClasses}"
                             th:value="${item.id}"
                             th:text="${item.title}"></option>
-                    </select>
+                    </select> <br />
                     <select th:field="*{viewmodel.courseID}">
                         <option
                                 th:each="item: ${viewmodel.listCourses}"
                                 th:value="${item.id}"
                                 th:text="${item.title}"></option>
+                    </select> <br />
+                    <select th:field="*{viewmodel.startTimeID}">
+                        <option
+                                th:each="item: ${viewmodel.courseTimeSchedule.startPoints}"
+                                th:value="${item.id}"
+                                th:text="${item.timeDisplay}"></option>
+                    </select><br />
+                    <select th:field="*{viewmodel.noOfLessons}">
+                        <option
+                                th:each="item: ${viewmodel.courseTimeSchedule.lessons}"
+                                th:value="${item}"
+                                th:text="${item}"></option>
                     </select>
                 </form>
             </div>
             <div style="clear:both;margin-top:10%;">
-                <h2><p th:text="${key}" style="color:forestgreen;"></p></h2>
+
                 <p th:text="'Class: ' + ${className}" style="font-size:16px;color:black;"></p>
                 <p th:text="'Course: ' + ${courseName}" style="font-size:16px;color:black;"></p>
+                <p th:text="'Course Start Time: ' + ${startTime}" style="font-size:16px;color:black;"></p>
+                <p th:text="'Course End Time: ' + ${endpoint}" style="font-size:16px;color:black;"></p>
+                <h1>Keys</h1>
+                <h2><p th:each="ck: ${keys}" th:text="${ck}" style="color:forestgreen;"></p></h2>
             </div>
         </div>
     </div>
