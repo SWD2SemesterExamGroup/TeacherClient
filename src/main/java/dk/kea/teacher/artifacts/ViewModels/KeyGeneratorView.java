@@ -3,20 +3,24 @@ package dk.kea.teacher.artifacts.ViewModels;
 import dk.kea.teacher.artifacts.ProjectLocals.ContainerTEMP;
 import dk.kea.teacher.artifacts.ViewModels.Models.ClassModel;
 import dk.kea.teacher.artifacts.ViewModels.Models.CourseModel;
+import dk.kea.teacher.artifacts.ViewModels.Models.CourseTimeSchedule;
 
 import java.util.List;
 
 public class KeyGeneratorView
 {
-    private int teacherID, courseID, classID;
+    private int teacherID, courseID, classID, startTimeID, noOfLessons;
     private List<CourseModel> listCourses;
     private List<ClassModel> listClasses;
+    private CourseTimeSchedule courseTimeSchedule;
     private final ContainerTEMP generator = new ContainerTEMP();
+
 
     public KeyGeneratorView()
     {
         this.listClasses = generator.getListClasses();
         this.listCourses = generator.getListCourses();
+        courseTimeSchedule = new CourseTimeSchedule();
         System.out.println(getCourseBy(2));
     }
 
@@ -25,6 +29,7 @@ public class KeyGeneratorView
         this.teacherID = teacherID;
         this.listClasses = generator.getListClasses();
         this.listCourses = generator.getListCourses();
+        courseTimeSchedule = new CourseTimeSchedule();
     }
 
     public KeyGeneratorView(int teacherID, List<CourseModel> listCourses, List<ClassModel> listClasses)
@@ -32,38 +37,57 @@ public class KeyGeneratorView
         this.teacherID = teacherID;
         this.listCourses = listCourses;
         this.listClasses = listClasses;
+        courseTimeSchedule = new CourseTimeSchedule();
     }
 
+    public int getStartTimeID()
+    {
+        return startTimeID;
+    }
+    public void setStartTimeID(int startTimeID)
+    {
+        this.startTimeID = startTimeID;
+    }
+    public int getNoOfLessons()
+    {
+        return noOfLessons;
+    }
+    public void setNoOfLessons(int noOfLessons)
+    {
+        this.noOfLessons = noOfLessons;
+    }
+    public CourseTimeSchedule getCourseTimeSchedule()
+    {
+        return courseTimeSchedule;
+    }
+    public void setCourseTimeSchedule(CourseTimeSchedule courseTimeSchedule)
+    {
+        this.courseTimeSchedule = courseTimeSchedule;
+    }
     public int getTeacherID()
     {
         return teacherID;
     }
-
     public int getCourseID()
     {
         return courseID;
     }
-
     public void setCourseID(int courseID)
     {
         this.courseID = courseID;
     }
-
     public int getClassID()
     {
         return classID;
     }
-
     public void setClassID(int classID)
     {
         this.classID = classID;
     }
-
     public List<CourseModel> getListCourses()
     {
         return listCourses;
     }
-
     public List<ClassModel> getListClasses()
     {
         return listClasses;

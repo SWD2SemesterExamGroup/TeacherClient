@@ -23,7 +23,7 @@ public class RandomString
 
     public static final String lower = upper.toLowerCase(Locale.ROOT);
 
-    public static final String special = "!\"#¤%&/()=?-:.;,><\\½§+-*";
+    public static final String special = "!\"#%&/()=?-:.;,><\\+-*";
 
     public static final String digits = "0123456789";
 

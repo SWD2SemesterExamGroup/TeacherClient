@@ -9,7 +9,6 @@ import java.security.SecureRandom;
 public class ArtifactsApplication {
 
 	public static void main(String[] args) {
-
 		SpringApplication.run(ArtifactsApplication.class, args);
 	}
 
