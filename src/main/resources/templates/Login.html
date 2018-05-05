@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Login</title>
+</head>
+<body>
+    <form th:action="@{/}" th:object="${loginModel}" method="post">
+        <input type="text" th:field="*{username}" />
+        <input type="password" th:field="*{password}" />
+        <input type="submit" value="Login" />
+    </form>
+</body>
+</html>
