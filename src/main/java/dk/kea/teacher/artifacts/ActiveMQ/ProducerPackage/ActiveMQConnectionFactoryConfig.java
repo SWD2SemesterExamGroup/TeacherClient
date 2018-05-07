@@ -1,6 +1,9 @@
 package dk.kea.teacher.artifacts.ActiveMQ.ProducerPackage;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import dk.kea.teacher.artifacts.ViewModels.Models.TeacherModel;
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.jms.DefaultJmsListenerContainerFactoryConfigurer;
 import org.springframework.context.annotation.Bean;
@@ -30,13 +33,16 @@ public class ActiveMQConnectionFactoryConfig
         connectionFactory.setBrokerURL(brokerUrl);
         connectionFactory.setUserName(username);
         connectionFactory.setPassword(password);
+
         return connectionFactory;
     }
+
     @Bean // Serialize message content to json using TextMessage
     public MessageConverter jacksonJmsMessageConverter() {
         MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
         converter.setTargetType(MessageType.TEXT);
         converter.setTypeIdPropertyName("_type");
+
         return converter;
     }
 
@@ -47,7 +53,9 @@ public class ActiveMQConnectionFactoryConfig
     public JmsListenerContainerFactory<?> jsaFactory(ConnectionFactory connectionFactory,
                                                      DefaultJmsListenerContainerFactoryConfigurer configurer) {
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
-        factory.setMessageConverter(jacksonJmsMessageConverter());
+        System.out.println("ActiveMQ config JmsListener container factory");
+        //factory.setMessageConverter(jacksonJmsMessageConverter());
+        factory.setMessageConverter(new JsonMessageConverter());
         configurer.configure(factory, connectionFactory);
         return factory;
     }
@@ -60,6 +68,7 @@ public class ActiveMQConnectionFactoryConfig
         JmsTemplate template = new JmsTemplate();
         template.setMessageConverter(jacksonJmsMessageConverter());
         template.setConnectionFactory(connectionFactory());
+
         return template;
     }
 }

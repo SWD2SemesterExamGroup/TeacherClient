@@ -1,18 +1,20 @@
 package dk.kea.teacher.artifacts.ViewModels.Models;
 
-import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.List;
 
-@JsonRootName("teacherModel")
-public class TeacherModel
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class,property="@id", scope = TeacherModel.class)
+public class TeacherModel implements Serializable
 {
     private int teacherID;
-    private List<CourseModel> listCourses;
-    private List<ClassModel> listClasses;
+    private String teacherName;
+    private List<BaseCModel> courses;
 
     public TeacherModel()
     {
@@ -21,11 +23,26 @@ public class TeacherModel
     {
         teacherID = id;
     }
-    public TeacherModel(int teacherID, List<CourseModel> listCourses, List<ClassModel> listClasses)
+    public TeacherModel(int teacherID, List<BaseCModel> courses)
     {
         this.teacherID = teacherID;
-        this.listCourses = listCourses;
-        this.listClasses = listClasses;
+        this.courses = courses;
+    }
+    public TeacherModel(int teacherID, String teacherName, List<BaseCModel> courses)
+    {
+        this.teacherID = teacherID;
+        this.teacherName = teacherName;
+        this.courses = courses;
+    }
+
+    public String getTeacherName()
+    {
+        return teacherName;
+    }
+
+    public void setTeacherName(String teacherName)
+    {
+        this.teacherName = teacherName;
     }
 
     public int getTeacherID()
@@ -38,24 +55,14 @@ public class TeacherModel
         this.teacherID = teacherID;
     }
 
-    public List<CourseModel> getListCourses()
+    public List<BaseCModel> getCourses()
     {
-        return listCourses;
+        return courses;
     }
 
-    public void setListCourses(List<CourseModel> listCourses)
+    public void setCourses(List<BaseCModel> courses)
     {
-        this.listCourses = listCourses;
-    }
-
-    public List<ClassModel> getListClasses()
-    {
-        return listClasses;
-    }
-
-    public void setListClasses(List<ClassModel> listClasses)
-    {
-        this.listClasses = listClasses;
+        this.courses = courses;
     }
 
     /**
@@ -63,21 +70,20 @@ public class TeacherModel
      */
     @Override
     public String toString() {
-        JSONObject jsonInfo = new JSONObject();
+        JSONObject jsonInfo = new JSONObject(this);
 
         try {
 
             jsonInfo.put("teacherID", this.teacherID);
 
-            JSONArray courseArray = new JSONArray();
-            JSONArray classArray = new JSONArray();
+            JSONArray courseArray = new JSONArray(this.courses);
 
-            if (this.listCourses != null) {
-                this.listCourses.forEach(course -> {
+            if (this.courses != null) {
+                this.courses.forEach(course -> {
                     JSONObject subJson = new JSONObject();
                     try {
-                        subJson.put("courseID", course.getId());
-                        subJson.put("courseTitle", course.getTitle());
+                        subJson.put("ID", course.getID());
+                        subJson.put("Title", course.getTitle());
 
                     } catch (JSONException eJSON) {
                         System.out.println("toString() : inner : " + this.getClass());
@@ -85,21 +91,6 @@ public class TeacherModel
                     }
                 });
                 jsonInfo.put("courses", courseArray);
-            }
-
-            if (this.listClasses != null) {
-                this.listClasses.forEach(studentClass -> {
-                    JSONObject subJson = new JSONObject();
-                    try {
-                        subJson.put("classID", studentClass.getId());
-                        subJson.put("classTitle", studentClass.getTitle());
-                    } catch (JSONException eJSON) {
-                        System.out.println("toString() : inner : " + this.getClass());
-                        eJSON.printStackTrace();
-                    }
-                });
-
-                jsonInfo.put("classes", classArray);
             }
         } catch (JSONException eJSON) {
             System.out.println("toString() : " + this.getClass());

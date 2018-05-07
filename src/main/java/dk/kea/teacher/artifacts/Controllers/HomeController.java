@@ -1,5 +1,6 @@
 package dk.kea.teacher.artifacts.Controllers;
 
+import dk.kea.teacher.artifacts.ActiveMQ.ProducerPackage.JmsConsumer;
 import dk.kea.teacher.artifacts.ActiveMQ.ProducerPackage.JmsProducer;
 import dk.kea.teacher.artifacts.Helpers.KeyGeneratorController;
 import dk.kea.teacher.artifacts.LoginPackage.Authorization;
@@ -18,6 +19,8 @@ public class HomeController
     private ContainerTEMP generator = new ContainerTEMP();
     @Autowired
     private JmsProducer producer;
+    @Autowired
+    private JmsConsumer consumer;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(Model model) {
@@ -34,6 +37,7 @@ public class HomeController
         if ((id = Authorization.login(login.getUsername(), login.getPassword())) != 0)
         {
             producer.send(new TeacherModel(id));
+
             return "redirect:/home/";
         }
         // 2. Retreive teacher id

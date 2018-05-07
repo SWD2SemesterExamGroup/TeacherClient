@@ -15,6 +15,10 @@ public class JmsProducer {
     String queue;
 
     public void send(TeacherModel teacher){
+        System.out.println("Queue and TeacherModel");
+        System.out.println(queue);
+        System.out.println(teacher.toString());
         jmsTemplate.convertAndSend(queue, teacher);
+
     }
 }

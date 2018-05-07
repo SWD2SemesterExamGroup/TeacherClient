@@ -1,5 +1,9 @@
 package dk.kea.teacher.artifacts.ViewModels.Models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class,property="@id", scope = ClassModel.class)
 public class ClassModel
 {
     private int id;
