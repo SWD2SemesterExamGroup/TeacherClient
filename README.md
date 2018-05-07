@@ -3,11 +3,15 @@ Java Spring Boot
 
 ## Repository Package Include
 * Source Code
+* Maven
+* Spring Boot
+    * Thymeleaf
 
 ## Installation Guide
 1. Import project to IntelliJ
 2. Download Denpendencies
-3. Run UI Client
+3. Before Run have a ActiveMQ server and the MOM/ActiveMQController Application
+4. Run UI Client
 
 ## Settings
 1. application.properties
@@ -16,15 +20,5 @@ Java Spring Boot
 2. Run ArtifactsApplication.main(String[]args). 
     * args.length = 0
 
-### Version
-- 0.2.1
-
-## Authors
-- Nicklas Andersen
-    - nick2463@stud.kea.dk
-- Anthony Vincenzo Angione
-    - School Mail
-- Inga Hercberga
-    - School Mail
-- Troels Helbo Jensen
-    - troe2725@stud.kea.dk
+# Version
+- 0.1.2
