@@ -21,4 +21,6 @@ public class JmsProducer {
         jmsTemplate.convertAndSend(queue, teacher);
 
     }
+
+    public TeacherModel receive() { return (TeacherModel)jmsTemplate.receiveAndConvert(queue); }
 }

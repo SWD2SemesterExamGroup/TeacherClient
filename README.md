@@ -4,12 +4,13 @@ Java Spring Boot
 ## Repository Package Include
 * Source Code
 * Maven
+* jdk 1.8.* and jdk9
 * Spring Boot
     * Thymeleaf
 
 ## Installation Guide
 1. Import project to IntelliJ
-2. Download Denpendencies
+2. Download Dependencies
 3. Before Run have a ActiveMQ server and the MOM/ActiveMQController Application
 4. Run UI Client
 
@@ -21,4 +22,4 @@ Java Spring Boot
     * args.length = 0
 
 # Version
-- 0.1.2
+- 0.1.3

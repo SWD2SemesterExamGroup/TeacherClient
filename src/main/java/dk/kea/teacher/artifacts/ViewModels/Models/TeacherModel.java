@@ -1,19 +1,28 @@
 package dk.kea.teacher.artifacts.ViewModels.Models;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.boot.jackson.JsonComponent;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+import javax.xml.ws.WebServiceProvider;
 import java.io.Serializable;
 import java.util.List;
 
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class,property="@id", scope = TeacherModel.class)
+//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class,property="@id", scope = TeacherModel.class)
+@Service
+@JsonComponent
 public class TeacherModel implements Serializable
 {
     private int teacherID;
     private String teacherName;
+    @JsonInclude
     private List<BaseCModel> courses;
 
     public TeacherModel()
@@ -23,6 +32,13 @@ public class TeacherModel implements Serializable
     {
         teacherID = id;
     }
+
+    public TeacherModel(int teacherID, String teacherName)
+    {
+        this.teacherID = teacherID;
+        this.teacherName = teacherName;
+    }
+
     public TeacherModel(int teacherID, List<BaseCModel> courses)
     {
         this.teacherID = teacherID;
@@ -64,9 +80,24 @@ public class TeacherModel implements Serializable
     {
         this.courses = courses;
     }
+    public void addCourseToList(BaseCModel course) {
+        this.courses.add(course);
+    }
+
+    public String toStringDisplay()
+    {
+        String value = "TeacherModel{" +
+                "teacherID=" + teacherID +
+                ", teacherName='" + teacherName + '\'' +
+                ", courses=";
+        for (BaseCModel bcm: courses)
+            value += bcm + ", ";
+        value += "}\n";
+        return value;
+    }
 
     /**
-     * show detail view
+     * show detail view in JSON
      */
     @Override
     public String toString() {
@@ -82,9 +113,8 @@ public class TeacherModel implements Serializable
                 this.courses.forEach(course -> {
                     JSONObject subJson = new JSONObject();
                     try {
-                        subJson.put("ID", course.getID());
-                        subJson.put("Title", course.getTitle());
-
+                        subJson = new JSONObject(course);
+                        courseArray.put(subJson);
                     } catch (JSONException eJSON) {
                         System.out.println("toString() : inner : " + this.getClass());
                         eJSON.printStackTrace();

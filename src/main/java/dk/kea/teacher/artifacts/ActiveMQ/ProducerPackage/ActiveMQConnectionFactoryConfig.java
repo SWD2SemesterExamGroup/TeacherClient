@@ -66,9 +66,10 @@ public class ActiveMQConnectionFactoryConfig
     @Bean
     public JmsTemplate jmsTemplate(){
         JmsTemplate template = new JmsTemplate();
-        template.setMessageConverter(jacksonJmsMessageConverter());
+        template.setMessageConverter(new JsonMessageConverter());
         template.setConnectionFactory(connectionFactory());
 
         return template;
     }
+
 }

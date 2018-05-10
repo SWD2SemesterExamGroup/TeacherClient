@@ -1,17 +1,23 @@
 package dk.kea.teacher.artifacts.Controllers;
 
 import dk.kea.teacher.artifacts.ActiveMQ.ProducerPackage.JmsConsumer;
+import dk.kea.teacher.artifacts.ActiveMQ.ProducerPackage.JmsPersister;
 import dk.kea.teacher.artifacts.ActiveMQ.ProducerPackage.JmsProducer;
 import dk.kea.teacher.artifacts.Helpers.KeyGeneratorController;
 import dk.kea.teacher.artifacts.LoginPackage.Authorization;
 import dk.kea.teacher.artifacts.LoginPackage.LoginModel;
 import dk.kea.teacher.artifacts.ProjectLocals.ContainerTEMP;
+import dk.kea.teacher.artifacts.ProjectLocals.KeyPlaceHolder;
 import dk.kea.teacher.artifacts.ViewModels.KeyGeneratorView;
 import dk.kea.teacher.artifacts.ViewModels.Models.TeacherModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import java.util.concurrent.TimeUnit;
 
 @Controller
 public class HomeController
@@ -21,6 +27,8 @@ public class HomeController
     private JmsProducer producer;
     @Autowired
     private JmsConsumer consumer;
+    @Resource
+    private JmsPersister persist;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(Model model) {
@@ -31,13 +39,20 @@ public class HomeController
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public String home(@ModelAttribute LoginModel login) {
+    public String home(@ModelAttribute LoginModel login) throws Exception {
         // 1. Check username and password
         int id = 0;
         if ((id = Authorization.login(login.getUsername(), login.getPassword())) != 0)
         {
             producer.send(new TeacherModel(id));
+            //System.out.println("producer Received: " + producer.receive());
+            System.out.println("Sleeping 3 seconds");
+            Thread.sleep(3000);
+            System.out.println("Consumer Messages");
+            System.out.println(persist.get());
+            System.out.println(persist.getLatest());
 
+            System.out.println("Redirecting");
             return "redirect:/home/";
         }
         // 2. Retreive teacher id
@@ -59,7 +74,7 @@ public class HomeController
     public String generate(Model model) {
         model.addAttribute("teacherID", 1);
         model.addAttribute("key", "");
-
+        System.out.println(persist.get());
         // TEST
         model.addAttribute("viewmodel", new KeyGeneratorView());
         return "keygenerator";

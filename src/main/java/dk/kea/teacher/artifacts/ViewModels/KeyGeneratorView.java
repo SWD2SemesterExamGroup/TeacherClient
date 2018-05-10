@@ -7,6 +7,9 @@ import dk.kea.teacher.artifacts.ViewModels.Models.CourseTimeSchedule;
 
 import java.util.List;
 
+/**
+ * View model for the teacher
+ */
 public class KeyGeneratorView
 {
     private int teacherID, courseID, classID, startTimeID, noOfLessons;

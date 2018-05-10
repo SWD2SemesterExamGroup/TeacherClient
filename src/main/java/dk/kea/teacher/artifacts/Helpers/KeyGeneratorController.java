@@ -1,5 +1,7 @@
 package dk.kea.teacher.artifacts.Helpers;
 
+import dk.kea.teacher.artifacts.ProjectLocals.KeyPlaceHolder;
+
 import java.util.ArrayList;
 
 public class KeyGeneratorController
@@ -14,6 +16,7 @@ public class KeyGeneratorController
         System.out.println("Modules: " + modules);
         for (int i = 0; i < modules; i++)
             keys.add(key.nextString());
+        KeyPlaceHolder.addKeys(keys);
         return keys;
     }
 

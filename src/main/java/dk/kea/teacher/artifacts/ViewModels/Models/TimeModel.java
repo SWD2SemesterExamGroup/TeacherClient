@@ -1,5 +1,8 @@
 package dk.kea.teacher.artifacts.ViewModels.Models;
 
+/**
+ * Used as placeholder for ids and name fo dropdown couse start time
+ */
 public class TimeModel
 {
     private int id;

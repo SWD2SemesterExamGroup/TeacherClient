@@ -3,6 +3,9 @@ package dk.kea.teacher.artifacts.ViewModels.Models;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Used for generation of
+ */
 public class CourseTimeSchedule
 {
     // Generate List of starttimes interval 15 min
@@ -19,6 +22,9 @@ public class CourseTimeSchedule
         generateList();
     }
 
+    /**
+     * Generating list for course start dropdown in view
+     */
     private void generateList() {
         // Start time from 8:00 to 20:00 by 00:15
         startPoints.add(new TimeModel(0, "08:30"));
