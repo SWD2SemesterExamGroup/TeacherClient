@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Teacher User Interface</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/3.2.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+</head>
+<body>
+    <div class="container">
+        <!-- header Row -->
+        <div class="row">
+            <div class="col-xs-12" th:include="./student/partials/header.html"></div>
+        </div>
+        <!-- Top Content For Key Attendance Form -->
+        <div class="row">
+            <!-- Menu vertical
+            <div class="col-xs-2" th:include="./static/menuBar.html"></div>-->
+            <div class="col-xs-2 col-xs-offset-5 key-input">
+                <div class="col-xs-12">
+                    <form method="POST" action="/student/attendanceKey">
+                        <!-- Hidden Student Id -->
+                        <input type="hidden" th:name="studentID" th:value="${studentID}" />
+                        <!-- Text inputbox with placeholder for Attendance Key -->
+                        <div th:if="${!isAccepted}" class="key-input-attendance">
+                            <p th:if="${isError}" th:text="${errorMessage}" style="color:red;"></p>
+                            <input placeholder="Attendance Key" th:name="attKey" />
+                            <input type="submit" value="Send Key" />
+                        </div>
+                    </form>
+                </div>
+                <div th:if="${isAccepted}" class="col-xs-12">
+                    <p>Your key is accepted, <br />Have a lovely course</p>
+                </div>
+            </div>
+        </div>
+        <!-- Bottom Content of Student Profile -->
+        <div class="row">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-4">Profile Attendance Statistics</div>
+            <div class="col-xs-2"></div>
+            <div class="col-xs-4" th:include="./student/partials/menuBar.html">Menu Bar</div>
+            <div class="col-xs-1"></div>
+        </div>
+    </div>
+</body>
+</html>

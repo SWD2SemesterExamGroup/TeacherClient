@@ -1,0 +1,13 @@
+/*div div div {
+    border: 1px solid deeppink;
+}*/
+
+.key-input {
+    height-min: 50px;
+    height-max: 100px;
+    height: 100px;
+}
+
+.key-input-attendance {
+    margin-top: 10%;
+}
