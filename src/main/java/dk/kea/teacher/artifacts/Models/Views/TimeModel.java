@@ -1,4 +1,4 @@
-package dk.kea.teacher.artifacts.ViewModels.Models;
+package dk.kea.teacher.artifacts.Models.Views;
 
 /**
  * Used as placeholder for ids and name fo dropdown couse start time

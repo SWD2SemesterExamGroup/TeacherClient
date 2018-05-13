@@ -1,25 +1,19 @@
 package dk.kea.teacher.artifacts.ActiveMQ.ProducerPackage;
 
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dk.kea.teacher.artifacts.ViewModels.Models.BaseCModel;
-import dk.kea.teacher.artifacts.ViewModels.Models.TeacherModel;
+import dk.kea.teacher.artifacts.Models.Views.BaseCModel;
+import dk.kea.teacher.artifacts.Models.Views.TeacherModel;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
 import org.springframework.jms.support.converter.MessageConversionException;
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.Session;
 import javax.jms.TextMessage;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 

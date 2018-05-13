@@ -1,9 +1,7 @@
 package dk.kea.teacher.artifacts.ActiveMQ.ProducerPackage;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import dk.kea.teacher.artifacts.ViewModels.Models.BaseCModel;
-import dk.kea.teacher.artifacts.ViewModels.Models.TeacherModel;
+import dk.kea.teacher.artifacts.Models.Views.BaseCModel;
+import dk.kea.teacher.artifacts.Models.Views.TeacherModel;
 
 import javax.jms.JMSException;
 
@@ -11,7 +9,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.jms.annotation.JmsListener;
-import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -33,7 +30,7 @@ public class JmsConsumer {
         System.out.println("Received!! Object : " + teacher);
         System.out.println("Received!! Message: " + json);
 
-        System.out.println(generateFromJson(json));
+        //System.out.println(generateFromJson(json));
         persist.add(generateFromJson(json));
     }
 

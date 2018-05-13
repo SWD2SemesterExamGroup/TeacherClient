@@ -1,6 +1,6 @@
 package dk.kea.teacher.artifacts.ActiveMQ.ProducerPackage;
 
-import dk.kea.teacher.artifacts.ViewModels.Models.TeacherModel;
+import dk.kea.teacher.artifacts.Models.Views.TeacherModel;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 

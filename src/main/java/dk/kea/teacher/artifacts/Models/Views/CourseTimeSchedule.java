@@ -1,4 +1,4 @@
-package dk.kea.teacher.artifacts.ViewModels.Models;
+package dk.kea.teacher.artifacts.Models.Views;
 
 import java.util.ArrayList;
 import java.util.List;

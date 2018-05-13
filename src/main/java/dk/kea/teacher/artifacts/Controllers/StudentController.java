@@ -1,7 +1,7 @@
 package dk.kea.teacher.artifacts.Controllers;
 
 import dk.kea.teacher.artifacts.ProjectLocals.KeyPlaceHolder;
-import dk.kea.teacher.artifacts.ViewModels.ViewModel;
+import dk.kea.teacher.artifacts.Models.ViewModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,4 +1,4 @@
-package dk.kea.teacher.artifacts.ViewModels.Models;
+package dk.kea.teacher.artifacts.Models.Views;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -23,7 +23,11 @@ public class BaseCModel implements Serializable
     public BaseCModel()
     {
     }
-
+    public BaseCModel(long ID, String title)
+    {
+        this.ID = ID;
+        this.title = title;
+    }
     public BaseCModel(long ID, String title, BaseCModel courseClass)
     {
         this.ID = ID;

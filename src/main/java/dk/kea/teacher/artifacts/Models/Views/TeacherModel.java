@@ -1,17 +1,12 @@
-package dk.kea.teacher.artifacts.ViewModels.Models;
+package dk.kea.teacher.artifacts.Models.Views;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.boot.jackson.JsonComponent;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import javax.xml.ws.WebServiceProvider;
 import java.io.Serializable;
 import java.util.List;
 
@@ -83,6 +78,30 @@ public class TeacherModel implements Serializable
     public void addCourseToList(BaseCModel course) {
         this.courses.add(course);
     }
+
+    // Extra methods to search  for course
+    public BaseCModel getCourseBy(int id) {
+        BaseCModel course = null;
+        for (BaseCModel c: this.courses)
+            if (c.getID() == id)
+            {
+                course = c;
+                break;
+            }
+        return course;
+    }
+    public BaseCModel getCourseBy(String title) {
+        BaseCModel course = null;
+        for (BaseCModel c: this.courses)
+            if (c.getTitle().equalsIgnoreCase(title))
+            {
+                course = c;
+                break;
+            }
+        return course;
+    }
+
+    // Display and to string
 
     public String toStringDisplay()
     {

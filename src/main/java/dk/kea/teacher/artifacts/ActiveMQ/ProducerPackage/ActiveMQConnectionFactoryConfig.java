@@ -1,9 +1,6 @@
 package dk.kea.teacher.artifacts.ActiveMQ.ProducerPackage;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import dk.kea.teacher.artifacts.ViewModels.Models.TeacherModel;
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.jms.DefaultJmsListenerContainerFactoryConfigurer;
 import org.springframework.context.annotation.Bean;

@@ -1,6 +1,6 @@
-package dk.kea.teacher.artifacts.ViewModels;
+package dk.kea.teacher.artifacts.Models;
 
-import dk.kea.teacher.artifacts.ViewModels.Models.Student.StudentViewModel;
+import dk.kea.teacher.artifacts.Models.Views.Student.StudentViewModel;
 
 public class ViewModel
 {

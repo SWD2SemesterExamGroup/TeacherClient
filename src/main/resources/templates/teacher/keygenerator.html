@@ -14,26 +14,26 @@
         <div class="col-xs-2" th:include="./static/MenuBar.html"></div>
         <div class="col-xs-10" id="content">
             <div>
-                <form method="POST">
+                <form method="POST" th:object="${teacherView}">
                     <h3>Key generator</h3>
 
                     <input type="submit" name="submit" value="Generate" /> <br />
-                    <select th:field="*{viewmodel.classID}">
+                    <select th:field="*{classID}">
                         <option
-                            th:each="item: ${viewmodel.listClasses}"
+                            th:each="item: ${teacherView.listClasses}"
                             th:value="${item.ID}"
                             th:text="${item.title}"></option>
                     </select> <br />
 
-                    <select th:field="*{viewmodel.startTimeID}">
+                    <select th:field="*{startTimeID}">
                         <option
-                                th:each="item: ${viewmodel.courseTimeSchedule.startPoints}"
+                                th:each="item: ${teacherView.courseTimeSchedule.startPoints}"
                                 th:value="${item.id}"
                                 th:text="${item.timeDisplay}"></option>
                     </select><br />
-                    <select th:field="*{viewmodel.noOfLessons}">
+                    <select th:field="*{noOfLessons}">
                         <option
-                                th:each="item: ${viewmodel.courseTimeSchedule.lessons}"
+                                th:each="item: ${teacherView.courseTimeSchedule.lessons}"
                                 th:value="${item}"
                                 th:text="${item}"></option>
                     </select>
@@ -42,8 +42,8 @@
             <div style="clear:both;margin-top:10%;">
                 <p th:text="'Class: ' + ${className}" style="font-size:16px;color:black;"></p>
                 <p th:text="'Course: ' + ${courseName}" style="font-size:16px;color:black;"></p>
-                <p th:text="'Course Start Time: ' + ${startTime}" style="font-size:16px;color:black;"></p>
-                <p th:text="'Course End Time: ' + ${endpoint}" style="font-size:16px;color:black;"></p>
+                <p th:text="'Course Start Time: ' + ${startTimeID}" style="font-size:16px;color:black;"></p>
+                <p th:text="'Course End Time: ' + ${teacherView.noOfLessons}" style="font-size:16px;color:black;"></p>
                 <h1>Keys</h1>
                 <h2><p th:each="ck: ${keys}" th:text="${ck}" style="color:forestgreen;"></p></h2>
             </div>

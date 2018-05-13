@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pick a Course</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/3.2.0/css/bootstrap.min.css" />
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12" th:include="./static/HeaderDiv.html"></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-2" th:include="./static/MenuBar.html"></div>
+        <div class="col-xs-10" id="content">
+            <div>
+                <form method="POST" th:object="${teacherView}">
+                    <select th:field="*{courseID}">
+                        <option
+                                th:each="item: ${teacherView.teacherModel.courses}"
+                                th:value="${item.ID}"
+                                th:text="${item.title}"></option>
+                    </select>
+                    <input type="submit" value="Go on" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

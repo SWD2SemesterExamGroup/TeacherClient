@@ -1,4 +1,4 @@
-package dk.kea.teacher.artifacts.ViewModels.Models.Student;
+package dk.kea.teacher.artifacts.Models.Views.Student;
 
 public class StudentViewModel
 {
