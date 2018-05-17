@@ -1,0 +1,12 @@
+dk.kea.teacher.artifacts
+dk.kea.teacher.artifacts.ActiveMQ.ProducerPackage
+dk.kea.teacher.artifacts.ActiveMQ.ProducerPackage.student
+dk.kea.teacher.artifacts.Controllers
+dk.kea.teacher.artifacts.Controllers.Persisters
+dk.kea.teacher.artifacts.Helpers
+dk.kea.teacher.artifacts.LoginPackage
+dk.kea.teacher.artifacts.Models
+dk.kea.teacher.artifacts.Models.Views
+dk.kea.teacher.artifacts.Models.Views.Student
+dk.kea.teacher.artifacts.Models.Views.Teacher
+dk.kea.teacher.artifacts.ProjectLocals
