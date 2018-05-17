@@ -65,7 +65,8 @@ public class ViewPersister
         noOfLessons += 2;
         breaks += addBreakEntry(courseTimeSchedule.getStartPoints().get(time.getId() + lessonJump));
         for (int i = 1; i < keys.size(); i++) {
-            int index = i * lessonJump + breaks;
+            // TODO: Could be a fix to + time.getId()
+            int index = i * lessonJump + breaks + time.getId();
             this.listKeys.add(
                     new KeyModel(
                             i + 1,
