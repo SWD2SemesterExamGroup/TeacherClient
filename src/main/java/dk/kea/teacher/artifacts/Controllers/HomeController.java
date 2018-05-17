@@ -33,13 +33,9 @@ public class HomeController
         if ((id = Authorization.login(login.getUsername(), login.getPassword())) != 0)
         {
             producer.send(new TeacherModel(id));
-            //System.out.println("producer Received: " + producer.receive());
-            System.out.println("Sleeping 0.5 seconds");
-            Thread.sleep(500);
 
-            /*System.out.println("Consumer Messages");
-            System.out.println(persist.get());
-            System.out.println(persist.getLatest());*/
+            System.out.println("Sleeping 3.5 seconds");
+            Thread.sleep(3500);
 
             // Redirecting to the teacher Home folder
             return "redirect:/home/";
@@ -58,4 +54,10 @@ public class HomeController
     public String generateKey() {
         return "keygenerator";
     }
+
+    // Java Documentation
+    /*@RequestMapping("/documentation")
+    public String documentation() {
+        return "JavaDoc/index";
+    }*/
 }

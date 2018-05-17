@@ -1,12 +1,15 @@
 package dk.kea.teacher.artifacts.Controllers;
 
 import dk.kea.teacher.artifacts.ActiveMQ.ProducerPackage.JmsPersister;
+import dk.kea.teacher.artifacts.ActiveMQ.ProducerPackage.JmsProducer;
 import dk.kea.teacher.artifacts.Controllers.Persisters.ViewPersister;
 import dk.kea.teacher.artifacts.Helpers.KeyGeneratorController;
 import dk.kea.teacher.artifacts.Models.KeyGeneratorView;
 import dk.kea.teacher.artifacts.Models.Views.BaseCModel;
+import dk.kea.teacher.artifacts.Models.Views.CourseTimeSchedule;
 import dk.kea.teacher.artifacts.Models.Views.Teacher.TeacherViewPersist;
 import dk.kea.teacher.artifacts.Models.Views.TeacherModel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,9 +24,10 @@ import java.util.List;
 @Controller
 public class TeacherController
 {
+    @Autowired
+    private JmsProducer producer;
     @Resource
     private JmsPersister persist;
-
     @Resource
     private ViewPersister persistView;
 
@@ -41,7 +45,6 @@ public class TeacherController
         view.setListCourses(teacher.getCourses());
         view.setTeacherModel(teacher);
         model.addAttribute("teacherView", persistView.getTeacherViewPersist());
-
 
         return "teacher/pickcourse";
     }
@@ -87,11 +90,12 @@ public class TeacherController
         model.addAttribute("key", "");
 
         model.addAttribute("teacherView", persistView.getTeacherViewPersist());
+        model.addAttribute("generated", false);
         return "teacher/keygenerator";
     }
 
     @RequestMapping(value = "/key-gen", method = RequestMethod.POST)
-    public String generate(@ModelAttribute TeacherViewPersist teacherView, Model model) {
+    public String generate(@ModelAttribute TeacherViewPersist teacherView, Model model) throws Exception {
         BaseCModel course = persistView.getTeacherViewPersist().getTeacherModel().getCourseBy(persistView.getTeacherViewPersist().getCourseID());
         persistView.getTeacherViewPersist().setNoOfLessons(teacherView.getNoOfLessons());
         persistView.getTeacherViewPersist().setStartTimeID(teacherView.getStartTimeID());
@@ -99,7 +103,21 @@ public class TeacherController
         model.addAttribute("className", course.getCourseClass().getTitle());
         model.addAttribute("teacherView", persistView.getTeacherViewPersist());
         model.addAttribute("startTimeID", persistView.getTeacherViewPersist().getCourseTimeSchedule().getStartPoints().get(teacherView.getStartTimeID()).getTimeDisplay());
-        model.addAttribute("keys", KeyGeneratorController.GenerateKeys(teacherView.getNoOfLessons()));
+        // Generate keys by lessons
+        List<String> keys = KeyGeneratorController.GenerateKeys(teacherView.getNoOfLessons());
+        model.addAttribute("keys", keys);
+        persistView.getTeacherViewPersist().setClassID(teacherView.getClassID()); // Persist class id
+
+        // add keys and timestamp to the persistView
+        persistView.addKeysToList(
+                keys,
+                new CourseTimeSchedule().getStartPoints().get(teacherView.getStartTimeID()),
+                teacherView.getNoOfLessons());
+        producer.send(persistView);
+
+        Thread.sleep(3500);
+        System.out.println(persistView.getResponseMessage());
+        model.addAttribute("generated", true);
 
         return "teacher/keygenerator";
     }

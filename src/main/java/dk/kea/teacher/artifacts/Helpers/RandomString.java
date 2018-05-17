@@ -10,8 +10,9 @@ import java.util.Random;
  */
 public class RandomString
 {
-    /**
+    /***
      * Generate a random string.
+     * @return String
      */
     public String nextString() {
         for (int idx = 0; idx < buf.length; ++idx)
@@ -23,7 +24,7 @@ public class RandomString
 
     public static final String lower = upper.toLowerCase(Locale.ROOT);
 
-    public static final String special = "!\"#%&/()=?-:.;,><\\+-*";
+    public static final String special = "!#%&/()=?-:.;,><+-*";
 
     public static final String digits = "0123456789";
 
@@ -35,6 +36,12 @@ public class RandomString
 
     private final char[] buf;
 
+    /***
+     * Actual Random String generation
+     * @param length
+     * @param random
+     * @param symbols
+     */
     public RandomString(int length, Random random, String symbols) {
         if (length < 1) throw new IllegalArgumentException();
         if (symbols.length() < 2) throw new IllegalArgumentException();
@@ -43,21 +50,24 @@ public class RandomString
         this.buf = new char[length];
     }
 
-    /**
-     * Create an alphanumeric string generator.
+    /***
+     Create an alphanumeric string generator.
+     @param length
+     @param random
      */
     public RandomString(int length, Random random) {
         this(length, random, alphanum);
     }
 
-    /**
-     * Create an alphanumeric strings from a secure generator.
+    /***
+     Create an alphanumeric strings from a secure generator.
+     @param length
      */
     public RandomString(int length) {
         this(length, new SecureRandom());
     }
 
-    /**
+    /***
      * Create session identifiers.
      */
     public RandomString() {

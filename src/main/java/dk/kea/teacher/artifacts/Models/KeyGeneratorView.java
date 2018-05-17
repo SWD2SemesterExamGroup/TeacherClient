@@ -17,8 +17,6 @@ public class KeyGeneratorView
     private TeacherModel teacherModel;
 
     // Constructors
-
-
     public KeyGeneratorView()
     {
         this.listClasses = new ArrayList<>();
@@ -48,6 +46,7 @@ public class KeyGeneratorView
         this.teacherModel = new TeacherModel();
     }
 
+    // Getters and Setters
     public TeacherModel getTeacherModel()
     {
         return teacherModel;
@@ -100,12 +99,10 @@ public class KeyGeneratorView
     {
         this.classID = classID;
     }
-
     public List<BaseCModel> getListClasses()
     {
         return listClasses;
     }
-
     public void setListClasses(List<BaseCModel> listClasses)
     {
         this.listClasses = listClasses;
@@ -118,7 +115,6 @@ public class KeyGeneratorView
     {
         this.listCourses = listCourses;
     }
-
     public BaseCModel getCourseBy(int id) {
         BaseCModel course = null;
         for (BaseCModel c: this.listCourses)
@@ -139,7 +135,6 @@ public class KeyGeneratorView
             }
         return course;
     }
-
     public BaseCModel getClassBy(int id) {
         BaseCModel studentClass = null;
         for (BaseCModel c: this.listClasses)

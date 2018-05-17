@@ -1,5 +1,7 @@
 package dk.kea.teacher.artifacts.Models.Views;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +15,7 @@ public class CourseTimeSchedule
     private final int noOfQuatersSP = 48;
     private final int noOfLesson = 8;
     private List<TimeModel> startPoints;
+
     private List<Integer> lessons;
 
     public CourseTimeSchedule()
@@ -40,7 +43,6 @@ public class CourseTimeSchedule
     {
         return startPoints;
     }
-
     public List<Integer> getLessons()
     {
         return lessons;

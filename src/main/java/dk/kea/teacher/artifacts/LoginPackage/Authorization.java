@@ -10,4 +10,12 @@ public class Authorization
                     return usr.getID();
         return 0;
     }
+    public static int loginStudent(String username, String password) {
+        HardCodedUsers users = new HardCodedUsers();
+        for (HardCodedUser usr: users.getStudents())
+            if (usr.getUsername().equalsIgnoreCase(username))
+                if (usr.getPassword().equals(password))
+                    return usr.getID();
+        return 0;
+    }
 }
