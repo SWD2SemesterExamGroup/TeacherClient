@@ -75,14 +75,14 @@ public class StudentController
         // Sleep and wait for message back
         Thread.sleep(3500);
         boolean accept = persist.isAccept(), isError = persist.isAccept() == true ? false : true;
+        System.out.println("Is student key accepted");
+        System.out.println(accept);
+        System.out.println(isError);
+
         String errorMessage = "Wrong Key";
         // TODO: Add other checks to Key input from html
         // TODO: Change static key call to Call ESB/Mediator to confirm key
         // CAN BE DELETED WHEN CONNECTED TO MQ
-        if (KeyPlaceHolder.KEY_CHECK(key))
-            accept = true;
-        else
-            isError = true;
 
         model.addAttribute("isAccepted", accept);
         model.addAttribute("errorMessage", errorMessage);
