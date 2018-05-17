@@ -1,5 +1,6 @@
 package dk.kea.teacher.artifacts.ActiveMQ.ProducerPackage;
 
+import dk.kea.teacher.artifacts.Controllers.Persisters.ViewPersister;
 import dk.kea.teacher.artifacts.Models.Views.BaseCModel;
 import dk.kea.teacher.artifacts.Models.Views.TeacherModel;
 
@@ -22,6 +23,8 @@ import java.util.List;
 public class JmsConsumer {
     @Resource
     private JmsPersister persist;
+    @Resource
+    private ViewPersister teacherKeyPersist;
 
     @JmsListener(destination = "${jsa.activemq.queue}", containerFactory="jsaFactory")
     public void receive(Message teacher) throws JMSException, IOException
@@ -32,6 +35,16 @@ public class JmsConsumer {
 
         //System.out.println(generateFromJson(json));
         persist.add(generateFromJson(json));
+    }
+
+    @JmsListener(destination="${jsa.activemq.keytopic}", containerFactory = "jsaFactory")
+    public void receiveKeyConfirmation(Message message) throws JMSException {
+        String text = ((TextMessage)message).getText();
+        System.out.println("Received!! Object : " + message);
+        System.out.println("Received!! Message: " + text);
+
+        // Add data to ViewPersister
+        teacherKeyPersist.setResponseMessage(text);
     }
 
     private String filterActiveMQMsg(String str) {
