@@ -1,5 +1,6 @@
 dk.kea.teacher.artifacts
 dk.kea.teacher.artifacts.ActiveMQ.ProducerPackage
+dk.kea.teacher.artifacts.ActiveMQ.ProducerPackage.helpers
 dk.kea.teacher.artifacts.ActiveMQ.ProducerPackage.student
 dk.kea.teacher.artifacts.Controllers
 dk.kea.teacher.artifacts.Controllers.Persisters
