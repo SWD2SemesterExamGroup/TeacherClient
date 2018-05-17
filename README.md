@@ -30,3 +30,4 @@ Java Spring Boot
 2. http:localhost:801/student/, Student login
 
 ## Other Documentation
+Find java documentation: JavaDocumentation/index.html
