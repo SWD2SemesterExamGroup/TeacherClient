@@ -1,6 +1,8 @@
 package dk.kea.teacher.artifacts.ActiveMQ.ProducerPackage.student;
 
+import dk.kea.teacher.artifacts.ActiveMQ.ProducerPackage.helpers.TextJsonExtration;
 import dk.kea.teacher.artifacts.Controllers.Persisters.StudentViewPersist;
+import org.json.JSONObject;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
@@ -15,13 +17,20 @@ public class JmsStudentConsumer
     @Resource
     private StudentViewPersist persist;
 
-    @JmsListener(destination = "${jsa.activemq.student.topic}", containerFactory = "jsaFactory")
+    private TextJsonExtration jsonExtraction = new TextJsonExtration();
+
+    @JmsListener(destination = "${student.key.reponse}", containerFactory = "jsaFactory")
     public void receive(Message message) throws JMSException
     {
         String jsonStudent = ((TextMessage) message).getText();
         System.out.println("Student Message");
         System.out.println("Received Object!! " + message);
         System.out.println("Received Message!! " + jsonStudent);
+
+        JSONObject json = new JSONObject(jsonExtraction.filterActiveMQMsg(jsonStudent));//persist.setAccept(true);
+        System.out.println("Json Extraction!! " + json.toString());
+        System.out.println("Specific value!! " + json.get("success"));
+        persist.setAccept(Boolean.parseBoolean(json.get("success").toString()));
     }
     /*
     @JmsListener(destination = "${jsa.activemq.queue}", containerFactory="jsaFactory")

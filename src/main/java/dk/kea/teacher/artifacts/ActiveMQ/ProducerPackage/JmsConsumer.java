@@ -1,5 +1,6 @@
 package dk.kea.teacher.artifacts.ActiveMQ.ProducerPackage;
 
+import dk.kea.teacher.artifacts.ActiveMQ.ProducerPackage.helpers.TextJsonExtration;
 import dk.kea.teacher.artifacts.Controllers.Persisters.ViewPersister;
 import dk.kea.teacher.artifacts.Models.Views.BaseCModel;
 import dk.kea.teacher.artifacts.Models.Views.TeacherModel;
@@ -26,6 +27,9 @@ public class JmsConsumer {
     @Resource
     private ViewPersister teacherKeyPersist;
 
+    private TextJsonExtration jsonExtraction = new TextJsonExtration();
+
+
     @JmsListener(destination = "${jsa.activemq.queue}", containerFactory="jsaFactory")
     public void receive(Message teacher) throws JMSException, IOException
     {
@@ -47,16 +51,9 @@ public class JmsConsumer {
         teacherKeyPersist.setResponseMessage(text);
     }
 
-    private String filterActiveMQMsg(String str) {
-        String result = str.replace("<string>", "");
-        result = result.replace("</string>", "");
-        result = result.replace("<?xml version=\"1.0\" encoding=\"utf-8\"?>", "");
-        return result;
-    }
-
     private TeacherModel generateFromJson(String json) throws IOException
     {
-        String result = filterActiveMQMsg(json);
+        String result = jsonExtraction.filterActiveMQMsg(json);
 
         List<BaseCModel> courses = new ArrayList<>();
         JSONObject jo = new JSONObject(result);
