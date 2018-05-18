@@ -8,11 +8,15 @@ import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
 
+/**
+ * A class both for Course and Class objects
+ */
 @Service
 @JsonComponent
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class,property="@ID", scope = BaseCModel.class)
 public class BaseCModel implements Serializable
 {
+    // Fields
     @JsonInclude
     private long ID;
     @JsonInclude
@@ -20,6 +24,7 @@ public class BaseCModel implements Serializable
     @JsonInclude
     private BaseCModel courseClass;
 
+    // Constructors
     public BaseCModel()
     {
     }
@@ -35,31 +40,27 @@ public class BaseCModel implements Serializable
         this.courseClass = courseClass;
     }
 
+    // Getters and Setters
     public long getID()
     {
         return ID;
     }
-
     public void setID(long ID)
     {
         this.ID = ID;
     }
-
     public String getTitle()
     {
         return title;
     }
-
     public void setTitle(String title)
     {
         this.title = title;
     }
-
     public BaseCModel getCourseClass()
     {
         return courseClass;
     }
-
     public void setCourseClass(BaseCModel courseClass)
     {
         this.courseClass = courseClass;

@@ -1,20 +1,18 @@
 package dk.kea.teacher.artifacts.Models.Views;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Calendar;
 
 /**
  * Used as placeholder for ids and name fo dropdown couse start time
  */
 public class TimeModel
 {
-    // Variables
+    // Fields
     private int id;
     private String timeDisplay;
     private String date;
 
+    // Constructors
     public TimeModel() {
         this.date = generateDate();
     }
@@ -49,6 +47,11 @@ public class TimeModel
     {
         this.date = date;
     }
+
+    /**
+     * Generate date for now
+     * @return String of LocalTime.now()
+     */
     private String generateDate() {
         return LocalDate.now().toString();
     }

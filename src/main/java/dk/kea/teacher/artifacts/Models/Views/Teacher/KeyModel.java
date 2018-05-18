@@ -2,6 +2,9 @@ package dk.kea.teacher.artifacts.Models.Views.Teacher;
 
 import dk.kea.teacher.artifacts.Models.Views.TimeModel;
 
+/**
+ * A key model to objectify key and time relations
+ */
 public class KeyModel
 {
     // Variables

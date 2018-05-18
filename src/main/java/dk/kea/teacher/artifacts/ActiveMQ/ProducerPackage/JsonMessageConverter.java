@@ -24,6 +24,7 @@ import java.util.List;
 @Service
 public class JsonMessageConverter implements MessageConverter
 {
+    // Fields
     private ObjectMapper mapper = new ObjectMapper();
 
     /**

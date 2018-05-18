@@ -6,18 +6,20 @@ import org.springframework.stereotype.Service;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 
+/**
+ * Student view persist
+ * Used for persisting values and view injection
+ */
 @Component
 @Service
 public class StudentViewPersist
 {
+    // Fields
     private int studentID;
     private String key;
     private boolean accept = false;
 
-    public StudentViewPersist()
-    {
-    }
-
+    // Getters and Setters
     public boolean isAccept()
     {
         return accept;
@@ -43,6 +45,7 @@ public class StudentViewPersist
         this.key = key;
     }
 
+    // Reset content of object
     public void clear() {
         this.studentID = 0;
         this.key = "";

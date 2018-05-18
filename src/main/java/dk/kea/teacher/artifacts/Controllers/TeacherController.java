@@ -21,9 +21,13 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The teacher Controller
+ */
 @Controller
 public class TeacherController
 {
+    // Fields
     @Autowired
     private JmsProducer producer;
     @Resource
@@ -38,12 +42,17 @@ public class TeacherController
      */
     @RequestMapping(value = "/coursephase", method = RequestMethod.GET)
     public String pickCourse(Model model) {
+        // Get latest message from ActiveMQ and persist object in new view
         persistView.setTeacherViewPersist(new TeacherViewPersist(persist.getLatest()));
+        // Initiate teacher model
         TeacherModel teacher = persistView.getTeacherViewPersist().getTeacherModel();
 
+        // Is still used but should be fixed
         KeyGeneratorView view = new KeyGeneratorView(teacher.getTeacherID());
         view.setListCourses(teacher.getCourses());
         view.setTeacherModel(teacher);
+
+        // Add view data
         model.addAttribute("teacherView", persistView.getTeacherViewPersist());
 
         return "teacher/pickcourse";
@@ -81,7 +90,11 @@ public class TeacherController
         return "redirect:/key-gen";
     }
 
-    // Done for now
+    /**
+     * Ready Model for view
+     * @param model
+     * @return String, view path
+     */
     @RequestMapping(value = "/key-gen", method = RequestMethod.GET)
     public String generate(Model model) {
         TeacherModel teacher = persistView.getTeacherViewPersist().getTeacherModel();
@@ -94,6 +107,13 @@ public class TeacherController
         return "teacher/keygenerator";
     }
 
+    /**
+     * Post Key Generation view
+     * @param teacherView
+     * @param model
+     * @return String, view path
+     * @throws Exception
+     */
     @RequestMapping(value = "/key-gen", method = RequestMethod.POST)
     public String generate(@ModelAttribute TeacherViewPersist teacherView, Model model) throws Exception {
         BaseCModel course = persistView.getTeacherViewPersist().getTeacherModel().getCourseBy(persistView.getTeacherViewPersist().getCourseID());

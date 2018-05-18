@@ -9,10 +9,17 @@ import org.springframework.messaging.converter.MappingJackson2MessageConverter;
 import org.springframework.messaging.converter.MessageConverter;
 import org.springframework.messaging.handler.annotation.support.DefaultMessageHandlerMethodFactory;
 
+/**
+ * JMS Listener config to setup connection factory message converter
+ */
 @EnableJms
 @Configuration
 public class JmsListenerConfig implements JmsListenerConfigurer
 {
+    /**
+     * Initiates default connection factory
+     * @return factory
+     */
     @Bean
     public DefaultMessageHandlerMethodFactory handlerMethodFactory() {
         DefaultMessageHandlerMethodFactory factory = new DefaultMessageHandlerMethodFactory();
@@ -20,12 +27,20 @@ public class JmsListenerConfig implements JmsListenerConfigurer
         return factory;
     }
 
+    /**
+     * Initiate message converter
+     * @return message converter
+     */
     @Bean
     public MessageConverter messageConverter() {
         System.out.println("MessageConverter JmsListnerConfig");
         return new MappingJackson2MessageConverter();
     }
 
+    /**
+     * Registrar new endpoints
+     * @param registrar
+     */
     @Override
     public void configureJmsListeners(JmsListenerEndpointRegistrar registrar) {
         registrar.setMessageHandlerMethodFactory(handlerMethodFactory());

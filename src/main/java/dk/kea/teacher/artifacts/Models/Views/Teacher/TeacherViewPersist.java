@@ -7,8 +7,13 @@ import dk.kea.teacher.artifacts.Models.Views.TeacherModel;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Teacher view persist is used for persisting data from consumer and
+ * help frontend create pages
+ */
 public class TeacherViewPersist
 {
+    // Fields
     private TeacherModel teacherModel;
     private List<BaseCModel> listClasses;
     private int teacherID, courseID, classID, startTimeID, noOfLessons;

@@ -1,6 +1,6 @@
 package dk.kea.teacher.artifacts.ActiveMQ.ProducerPackage.student;
 
-import dk.kea.teacher.artifacts.ActiveMQ.ProducerPackage.helpers.TextJsonExtration;
+import dk.kea.teacher.artifacts.ActiveMQ.ProducerPackage.helpers.TextJsonExtraction;
 import dk.kea.teacher.artifacts.Controllers.Persisters.StudentViewPersist;
 import org.json.JSONObject;
 import org.springframework.jms.annotation.JmsListener;
@@ -11,14 +11,22 @@ import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.TextMessage;
 
+/**
+ * Jms Student Consumer
+ */
 @Component
 public class JmsStudentConsumer
 {
+    // Fields
     @Resource
     private StudentViewPersist persist;
+    private TextJsonExtraction jsonExtraction = new TextJsonExtraction();
 
-    private TextJsonExtration jsonExtraction = new TextJsonExtration();
-
+    /**
+     * Student consumer of ActiveMQ
+     * @param message
+     * @throws JMSException
+     */
     @JmsListener(destination = "${student.key.reponse}", containerFactory = "jsaFactory")
     public void receive(Message message) throws JMSException
     {

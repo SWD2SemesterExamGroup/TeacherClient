@@ -1,7 +1,15 @@
 package dk.kea.teacher.artifacts.ActiveMQ.ProducerPackage.helpers;
 
-public class TextJsonExtration
+/**
+ * Text to Json Extraction
+ */
+public class TextJsonExtraction
 {
+    /**
+     * Filter message from ActiveMQ
+     * @param str
+     * @return Filtered String
+     */
     public String filterActiveMQMsg(String str) {
         String result = str.replace("<string>", "");
         result = result.replace("</string>", "");

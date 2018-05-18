@@ -6,23 +6,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Used for generation of
+ * Used for generation of course time schedule
+ * Mostly for the frontend
  */
 public class CourseTimeSchedule
 {
-    // Generate List of starttimes interval 15 min
-    // Generate List of lessons
+    // Fields
     private final int noOfQuatersSP = 48;
     private final int noOfLesson = 8;
     private List<TimeModel> startPoints;
-
     private List<Integer> lessons;
 
+    // Constructor
     public CourseTimeSchedule()
     {
         startPoints = new ArrayList<>();
         lessons = new ArrayList<>();
         generateList();
+    }
+
+    // Getters
+    public List<TimeModel> getStartPoints()
+    {
+        return startPoints;
+    }
+    public List<Integer> getLessons()
+    {
+        return lessons;
     }
 
     /**
@@ -37,14 +47,5 @@ public class CourseTimeSchedule
         // Start time from 7:45 to 23:00 by 00:15
         for (int i = 0; i < noOfLesson; i++)
             lessons.add(i);
-    }
-
-    public List<TimeModel> getStartPoints()
-    {
-        return startPoints;
-    }
-    public List<Integer> getLessons()
-    {
-        return lessons;
     }
 }

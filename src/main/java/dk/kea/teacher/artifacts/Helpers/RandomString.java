@@ -4,13 +4,26 @@ import java.security.SecureRandom;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Random;
-/*
- Link:
-    https://stackoverflow.com/questions/41107/how-to-generate-a-random-alpha-numeric-string
+
+/**
+ * Java generate "random" string
+ * https://stackoverflow.com/questions/41107/how-to-generate-a-random-alpha-numeric-string
  */
 public class RandomString
 {
-    /***
+    // Static Final Fields
+    private static final String upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final String lower = upper.toLowerCase(Locale.ROOT);
+    private static final String special = "!#%&/()=?-:.;,><+-*";
+    private static final String digits = "0123456789";
+    private static final String alphanum = upper + lower + digits + special;
+
+    // Fields
+    private final Random random;
+    private final char[] symbols;
+    private final char[] buf;
+
+    /**
      * Generate a random string.
      * @return String
      */
@@ -20,23 +33,7 @@ public class RandomString
         return new String(buf);
     }
 
-    public static final String upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-    public static final String lower = upper.toLowerCase(Locale.ROOT);
-
-    public static final String special = "!#%&/()=?-:.;,><+-*";
-
-    public static final String digits = "0123456789";
-
-    public static final String alphanum = upper + lower + digits + special;
-
-    private final Random random;
-
-    private final char[] symbols;
-
-    private final char[] buf;
-
-    /***
+    /**
      * Actual Random String generation
      * @param length
      * @param random
@@ -50,7 +47,7 @@ public class RandomString
         this.buf = new char[length];
     }
 
-    /***
+    /**
      Create an alphanumeric string generator.
      @param length
      @param random
@@ -59,7 +56,7 @@ public class RandomString
         this(length, random, alphanum);
     }
 
-    /***
+    /**
      Create an alphanumeric strings from a secure generator.
      @param length
      */
@@ -67,7 +64,7 @@ public class RandomString
         this(length, new SecureRandom());
     }
 
-    /***
+    /**
      * Create session identifiers.
      */
     public RandomString() {

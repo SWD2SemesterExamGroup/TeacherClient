@@ -15,11 +15,13 @@ import java.util.List;
 @JsonComponent
 public class TeacherModel implements Serializable
 {
+    // Fields
     private int teacherID;
     private String teacherName;
     @JsonInclude
     private List<BaseCModel> courses;
 
+    // Constructors
     public TeacherModel()
     {
     }
@@ -27,13 +29,11 @@ public class TeacherModel implements Serializable
     {
         teacherID = id;
     }
-
     public TeacherModel(int teacherID, String teacherName)
     {
         this.teacherID = teacherID;
         this.teacherName = teacherName;
     }
-
     public TeacherModel(int teacherID, List<BaseCModel> courses)
     {
         this.teacherID = teacherID;
@@ -46,40 +46,42 @@ public class TeacherModel implements Serializable
         this.courses = courses;
     }
 
+    // Getters and Setters
     public String getTeacherName()
     {
         return teacherName;
     }
-
     public void setTeacherName(String teacherName)
     {
         this.teacherName = teacherName;
     }
-
     public int getTeacherID()
     {
         return teacherID;
     }
-
     public void setTeacherID(int teacherID)
     {
         this.teacherID = teacherID;
     }
-
     public List<BaseCModel> getCourses()
     {
         return courses;
     }
-
     public void setCourses(List<BaseCModel> courses)
     {
         this.courses = courses;
     }
+
+    // Extra functionality
     public void addCourseToList(BaseCModel course) {
         this.courses.add(course);
     }
 
-    // Extra methods to search  for course
+    /**
+     * Get Course by id
+     * @param id
+     * @return
+     */
     public BaseCModel getCourseBy(int id) {
         BaseCModel course = null;
         for (BaseCModel c: this.courses)
@@ -90,6 +92,12 @@ public class TeacherModel implements Serializable
             }
         return course;
     }
+
+    /**
+     * Get course by title
+     * @param title
+     * @return Course as BaseCModel
+     */
     public BaseCModel getCourseBy(String title) {
         BaseCModel course = null;
         for (BaseCModel c: this.courses)

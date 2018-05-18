@@ -14,9 +14,13 @@ import org.springframework.jms.support.converter.MessageType;
 
 import javax.jms.ConnectionFactory;
 
+/**
+ * Configuration of connection factory
+ */
 @Configuration
 public class ActiveMQConnectionFactoryConfig
 {
+    // Fields
     @Value("${jsa.activemq.broker.url}")
     String brokerUrl;
     @Value("${jsa.activemq.broker.username}")
@@ -24,6 +28,10 @@ public class ActiveMQConnectionFactoryConfig
     @Value("${jsa.activemq.broker.password}")
     String password;
 
+    /**
+     * Initiate connection factory
+     * @return Connection factory
+     */
     @Bean
     public ConnectionFactory connectionFactory() {
         ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
@@ -34,7 +42,11 @@ public class ActiveMQConnectionFactoryConfig
         return connectionFactory;
     }
 
-    @Bean // Serialize message content to json using TextMessage
+    /**
+     * Serialize message content to json using TextMessage
+     * @return Converter
+     */
+    @Bean
     public MessageConverter jacksonJmsMessageConverter() {
         MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
         converter.setTargetType(MessageType.TEXT);
@@ -43,8 +55,11 @@ public class ActiveMQConnectionFactoryConfig
         return converter;
     }
 
-    /*
-     * Used for Receiving Message
+    /**
+     * Listener to Receiving Message
+     * @param connectionFactory
+     * @param configurer
+     * @return Jms Listener container factory
      */
     @Bean
     public JmsListenerContainerFactory<?> jsaFactory(ConnectionFactory connectionFactory,
@@ -57,8 +72,9 @@ public class ActiveMQConnectionFactoryConfig
         return factory;
     }
 
-    /*
-     * Used for Sending Messages.
+    /**
+     * Jms Template is used for the last step in communicating with the broker
+     * @return JmsTemplate
      */
     @Bean
     public JmsTemplate jmsTemplate(){
@@ -68,5 +84,4 @@ public class ActiveMQConnectionFactoryConfig
 
         return template;
     }
-
 }

@@ -10,11 +10,13 @@ import java.util.List;
  */
 public class KeyGeneratorView
 {
+    // Fields
     private int teacherID, courseID, classID, startTimeID, noOfLessons;
-    private List<BaseCModel> listCourses;
-    private List<BaseCModel> listClasses;
     private CourseTimeSchedule courseTimeSchedule;
     private TeacherModel teacherModel;
+    private List<BaseCModel> listCourses;
+    private List<BaseCModel> listClasses;
+
 
     // Constructors
     public KeyGeneratorView()
@@ -115,6 +117,12 @@ public class KeyGeneratorView
     {
         this.listCourses = listCourses;
     }
+
+    /**
+     * Gets course by id
+     * @param id
+     * @return Course as BaseCModel
+     */
     public BaseCModel getCourseBy(int id) {
         BaseCModel course = null;
         for (BaseCModel c: this.listCourses)
@@ -125,6 +133,12 @@ public class KeyGeneratorView
             }
         return course;
     }
+
+    /**
+     * Get Course by title
+     * @param title
+     * @return Course as BaseCModel
+     */
     public BaseCModel getCourseBy(String title) {
         BaseCModel course = null;
         for (BaseCModel c: this.listCourses)
@@ -135,6 +149,12 @@ public class KeyGeneratorView
             }
         return course;
     }
+
+    /**
+     * Get class by id
+     * @param id
+     * @return Class as BaseCModel
+     */
     public BaseCModel getClassBy(int id) {
         BaseCModel studentClass = null;
         for (BaseCModel c: this.listClasses)
@@ -145,6 +165,12 @@ public class KeyGeneratorView
             }
         return studentClass;
     }
+
+    /**
+     * Gets class by title
+     * @param title
+     * @return Class as BaseCModel
+     */
     public BaseCModel getClassBy(String title) {
         BaseCModel studentClass = null;
         for (BaseCModel c: this.listClasses)

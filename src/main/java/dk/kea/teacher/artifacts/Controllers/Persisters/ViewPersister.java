@@ -26,6 +26,7 @@ public class ViewPersister
         this.listKeys = new ArrayList<>();
     }
 
+    // Getters and Setters
     public TeacherViewPersist getTeacherViewPersist()
     {
         return teacherViewPersist;
@@ -47,12 +48,17 @@ public class ViewPersister
         this.responseMessage = responseMessage;
     }
 
+    /**
+     * Add keys to list keys
+     * @param keys
+     * @param time
+     * @param lessons
+     */
     public void addKeysToList(List<String> keys, TimeModel time, int lessons) {
         int lessonJump = 6; // Jump in hours for two lessons
         int breaks = 1; // No of breaks
         int noOfLessons = 0;
-        //TODO: Remake so TimeModel takes a TimeStamp by java.util.Date
-        //TODO: Redo json text message from this client
+
         // Add first key with time model implemented
         this.listKeys.add(
                 new KeyModel(
@@ -62,10 +68,11 @@ public class ViewPersister
                         courseTimeSchedule.getStartPoints().get(time.getId() + lessonJump)
                 )
         );
-        noOfLessons += 2;
+        noOfLessons += 2; // adds to lessons to move cursor in list
+        // adds one for break to move index cursor
         breaks += addBreakEntry(courseTimeSchedule.getStartPoints().get(time.getId() + lessonJump));
+        // Adds last of keys
         for (int i = 1; i < keys.size(); i++) {
-            // TODO: Could be a fix to + time.getId()
             int index = i * lessonJump + breaks + time.getId();
             this.listKeys.add(
                     new KeyModel(
@@ -81,6 +88,11 @@ public class ViewPersister
         }
     }
 
+    /**
+     * Add a break point i key list
+     * @param start
+     * @return 1
+     */
     private int addBreakEntry(TimeModel start) {
         this.listKeys.add(
                 new KeyModel(0,"BREAK",

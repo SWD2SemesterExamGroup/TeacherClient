@@ -1,6 +1,6 @@
 package dk.kea.teacher.artifacts.ActiveMQ.ProducerPackage;
 
-import dk.kea.teacher.artifacts.ActiveMQ.ProducerPackage.helpers.TextJsonExtration;
+import dk.kea.teacher.artifacts.ActiveMQ.ProducerPackage.helpers.TextJsonExtraction;
 import dk.kea.teacher.artifacts.Controllers.Persisters.ViewPersister;
 import dk.kea.teacher.artifacts.Models.Views.BaseCModel;
 import dk.kea.teacher.artifacts.Models.Views.TeacherModel;
@@ -20,16 +20,25 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Component for spring boot
+ * Jms Consumer as teacher consumer
+ */
 @Component
 public class JmsConsumer {
+    // Fields
     @Resource
     private JmsPersister persist;
     @Resource
     private ViewPersister teacherKeyPersist;
+    private TextJsonExtraction jsonExtraction = new TextJsonExtraction();
 
-    private TextJsonExtration jsonExtraction = new TextJsonExtration();
-
-
+    /**
+     * Listener on destination
+     * @param teacher
+     * @throws JMSException
+     * @throws IOException
+     */
     @JmsListener(destination = "${jsa.activemq.queue}", containerFactory="jsaFactory")
     public void receive(Message teacher) throws JMSException, IOException
     {
@@ -41,6 +50,11 @@ public class JmsConsumer {
         persist.add(generateFromJson(json));
     }
 
+    /**
+     * Listener on destination
+     * @param message
+     * @throws JMSException
+     */
     @JmsListener(destination="${jsa.activemq.keytopic}", containerFactory = "jsaFactory")
     public void receiveKeyConfirmation(Message message) throws JMSException {
         String text = ((TextMessage)message).getText();
@@ -51,6 +65,7 @@ public class JmsConsumer {
         teacherKeyPersist.setResponseMessage(text);
     }
 
+    // TODO: Remake in accordance to other redundant class file
     private TeacherModel generateFromJson(String json) throws IOException
     {
         String result = jsonExtraction.filterActiveMQMsg(json);
