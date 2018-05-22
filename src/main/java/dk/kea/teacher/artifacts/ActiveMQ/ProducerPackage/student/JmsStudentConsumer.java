@@ -1,6 +1,7 @@
 package dk.kea.teacher.artifacts.ActiveMQ.ProducerPackage.student;
 
 import dk.kea.teacher.artifacts.ActiveMQ.ProducerPackage.helpers.TextJsonExtraction;
+import dk.kea.teacher.artifacts.Controllers.Persisters.LegacyPersister;
 import dk.kea.teacher.artifacts.Controllers.Persisters.StudentViewPersist;
 import org.json.JSONObject;
 import org.springframework.jms.annotation.JmsListener;
@@ -20,6 +21,8 @@ public class JmsStudentConsumer
     // Fields
     @Resource
     private StudentViewPersist persist;
+    @Resource
+    private LegacyPersister persistLegacy;
     private TextJsonExtraction jsonExtraction = new TextJsonExtraction();
 
     /**
@@ -39,6 +42,17 @@ public class JmsStudentConsumer
         System.out.println("Json Extraction!! " + json.toString());
         System.out.println("Specific value!! " + json.get("success"));
         persist.setAccept(Boolean.parseBoolean(json.get("success").toString()));
+    }
+
+    @JmsListener(destination="${legacy.godkode.html}", containerFactory = "jsaFactory")
+    public void legacyReceive(Message html) throws JMSException {
+        System.out.println("i got this");
+        System.out.println("Message:\n" + html);
+        System.out.println("Text:\n" + ((TextMessage) html).getText());
+
+        persistLegacy.add((TextMessage) html);
+
+        System.out.println("persistence object: " + persistLegacy.getLatest());
     }
     /*
     @JmsListener(destination = "${jsa.activemq.queue}", containerFactory="jsaFactory")

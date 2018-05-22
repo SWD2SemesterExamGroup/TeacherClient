@@ -12,7 +12,7 @@ import java.util.List;
 public class CourseTimeSchedule
 {
     // Fields
-    private final int noOfQuatersSP = 48;
+    private final int noOfQuatersSP = 88;
     private final int noOfLesson = 8;
     private List<TimeModel> startPoints;
     private List<Integer> lessons;

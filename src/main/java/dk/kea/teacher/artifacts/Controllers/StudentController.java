@@ -1,6 +1,7 @@
 package dk.kea.teacher.artifacts.Controllers;
 
 import dk.kea.teacher.artifacts.ActiveMQ.ProducerPackage.student.JmsStudentProducer;
+import dk.kea.teacher.artifacts.Controllers.Persisters.LegacyPersister;
 import dk.kea.teacher.artifacts.Controllers.Persisters.StudentViewPersist;
 import dk.kea.teacher.artifacts.LoginPackage.Authorization;
 import dk.kea.teacher.artifacts.LoginPackage.LoginModel;
@@ -27,6 +28,9 @@ public class StudentController
     @Resource
     private StudentViewPersist persist;
 
+    @Resource
+    private LegacyPersister persistLegacy;
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String login(Model model) {
         model.addAttribute("loginModel", new LoginModel());
@@ -47,6 +51,13 @@ public class StudentController
         }
 
         return "redirect:/student/";
+    }
+
+    @RequestMapping("/events")
+    public String events(Model model) {
+        model.addAttribute("content", persistLegacy.getLatest());
+
+        return "legacy/events";
     }
 
     @RequestMapping("/home")

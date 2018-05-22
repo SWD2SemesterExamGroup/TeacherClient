@@ -46,7 +46,6 @@ public class JmsConsumer {
         System.out.println("Received!! Object : " + teacher);
         System.out.println("Received!! Message: " + json);
 
-        //System.out.println(generateFromJson(json));
         persist.add(generateFromJson(json));
     }
 

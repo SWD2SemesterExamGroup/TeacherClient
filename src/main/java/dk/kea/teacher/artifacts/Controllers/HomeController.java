@@ -17,8 +17,6 @@ public class HomeController
 {
     @Autowired
     private JmsProducer producer;
-    @Resource
-    private JmsPersister persist;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(Model model) {
@@ -54,10 +52,4 @@ public class HomeController
     public String generateKey() {
         return "keygenerator";
     }
-
-    // Java Documentation
-    /*@RequestMapping("/documentation")
-    public String documentation() {
-        return "JavaDoc/index";
-    }*/
 }

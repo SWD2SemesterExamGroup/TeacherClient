@@ -21,7 +21,7 @@ public class JmsPersister
     }
 
     // add teacher to object
-    void add(TeacherModel t) {
+    public void add(TeacherModel t) {
         allOfMyJmsObjects.put(System.currentTimeMillis(), t);
     }
 
